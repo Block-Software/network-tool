@@ -10,7 +10,7 @@
   "event": "event name",
   "application": "application triggering event",
   "trigger_time": "timestamp for event",
-  "meta": { a JSON object of unique data for the category }
+  "meta": { "a JSON object of": "unique data for the category" }
 }
 ```
 ### Response: `JSON` (this response is added to the callback trigger)
@@ -39,7 +39,7 @@
     "hang":  {
         "meta": [ "fields related to the category" ],
         "callback": "action name to trigger on success – and pass the event response",
-        "trigger_criteria": [ "unresponsive": "> 10000ms"]
+        "trigger_criteria": { "unresponsive": "> 10000ms" }
     },
     "sync": {
       "listeners": [
