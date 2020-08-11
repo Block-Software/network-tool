@@ -14,7 +14,8 @@
 }
 ```
 ### Response: `JSON` (this response is added to the callback trigger)
-```JSON {
+```JSON
+{
   "status": "good | warning | error",
   "message": "message relating to the status",
   "average": [ "an array of average responses in the category" ],
