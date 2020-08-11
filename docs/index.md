@@ -11,10 +11,10 @@ nav_order: 0
 ### Data flow diagram
 ![data-flow](patent-diagram.jpg)
 
-### [Agent specification](agent.html)
+### [Agent specification](agent)
 
-### [Communication protocol](communication_spec.html)
+### [Communication protocol](comms_spec)
 
-### [Database structure](database_structure.html)
+### [Database structure](db_structure)
 
-### [Example data content](example_data.html)
+### [Example data content](example_data)

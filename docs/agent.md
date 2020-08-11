@@ -4,6 +4,7 @@
 
 layout: page
 title: Performance and monitoring agent
+permalink: /agent/
 ---
 
 # Block Device performance and monitoring agent
