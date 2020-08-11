@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Communication
-permalink: /comms_spec/
+title: Database structure
+permalink: /db_structure/
 ---
 # Connectivity monitoring and self-healing
 ## PUT request for logging events:

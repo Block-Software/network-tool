@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Communication
-permalink: /comms_spec/
+title: Example data
+permalink: /example_data/
 ---
 # Connectivity monitoring and self-healing
 ## PUT request for logging events:
