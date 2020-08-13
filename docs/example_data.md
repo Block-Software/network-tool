@@ -8,7 +8,7 @@ permalink: /example_data/
 
 Below are the steps to initiate a device onto the network. Associate a user to a device, report entries to the platform and allow the user to view the data in their location.
 
-1. ### Create a member
+### Create a member
 
 A network administrator creates users based on their location and who their managers are. Each manager has access to the dashboard to view the metrics and reporting within their location, and their team members.
 
@@ -25,7 +25,7 @@ Payload:
 }
 ```
 
-1. ### Register devices
+### Register devices
 
 When a new device is added to the network, and the agent is installed, it automatically sends information to the central API about itself. If anything can't be automatically gathered from the device, a wizard will popup:
 
@@ -45,13 +45,11 @@ Payload:
 }
 ```
 
-1. ### Link devices to account
-
-
+### Link devices to account
 
 PUT `/api/user/devices`
 
-1. ### Associate applications
+### Associate applications
 
 PUT `/api/user/applications`
 
