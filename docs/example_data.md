@@ -3,79 +3,56 @@ layout: page
 title: Example data
 permalink: /example_data/
 ---
-# Connectivity monitoring and self-healing
-## PUT request for logging events:
-### PUT: `/api/event`
-### Payload: `JSON`
+
+## User preferences creating a dashboard of a teams usage
+
+Below are the steps to initiate a device onto the network. Associate a user to a device, report entries to the platform and allow the user to view the data in their location.
+
+1. ### Create a member
+
+A network administrator creates users based on their location and who their managers are. Each manager has access to the dashboard to view the metrics and reporting within their location, and their team members.
+
+PUT `/api/user`
+Payload:
+
 ```JSON
 {
-  "cpu": "cpu usage percentage",
-  "ram": "ram usage percentage",
-  "latency": "network latency in milliseconds",
-  "event": "event name",
-  "application": "application triggering event",
-  "trigger_time": "timestamp for event",
-  "meta": { "a JSON object of": "unique data for the category" }
+  "name": "Foo Bar",
+  "email": "test@example.com",
+  "phone": "01223217212",
+  "role": "b295645d-c869-4d2f-ada6-f65c86b77332",
+  "manager": "1098eee4-e57a-440e-b9cb-8d0a1676c9e8"
 }
 ```
-### Response: `JSON` (this response is added to the callback trigger)
+
+1. ### Register devices
+
+When a new device is added to the network, and the agent is installed, it automatically sends information to the central API about itself. If anything can't be automatically gathered from the device, a wizard will popup:
+
+1. Enter network location
+1. List of expected users (a pre-determined list of common users)
+1. Device group (which department this device belongs to)
+
+POST `/api/device`
+
+Payload:
+
 ```JSON
 {
-  "status": "good | warning | error",
-  "message": "message relating to the status",
-  "average": [ "an array of average responses in the category" ],
-  "event_id": "unique event ID for follow up tracing"
+  "name": "computer name",
+  "mac": "mac address",
+  "location": "uuid_reference"
 }
 ```
-## GET request for retrieving an application category:
-### GET: `/api/category?application=Outlook`
-### Response: `JSON`
-```JSON
-{
-  "category": "email_client | productivity_app | creative_app | database_app | cloud_app",
-  "valid_metrics": {
-    "open": {
-      "meta": [ "fields related to the category" ],
-      "callback": "action name to trigger on success – and pass the event response"
-    },
-    "close": {
-      "meta": [ "fields related to the category" ],
-      "callback": "action name to trigger on success – and pass the event response"
-    },
-    "hang":  {
-        "meta": [ "fields related to the category" ],
-        "callback": "action name to trigger on success – and pass the event response",
-        "trigger_criteria": { "unresponsive": "> 10000ms" }
-    },
-    "sync": {
-      "listeners": [
-          {
-            "url": "URL to listen from application",
-            "method": "POST | GET"
-          }
-        ]
-    }
-}
-```
-## Application categories:
 
-Application categories are used to allow different organisations to provide their own specific application and for it to fall within our dashboard and reporting tools correctly.
+1. ### Link devices to account
 
-`email_client`: Eg Outlook, Mac Mail, Thunderbird, Gmail
 
-`productivity_app`: Eg MS Word, MS Excel
 
-`creative_app`: Eg Photoshop
+PUT `/api/user/devices`
 
-`database_app`: Eg PAS, MS Access
+1. ### Associate applications
 
-`cloud_app`: Eg Dropbox, Sage
+PUT `/api/user/applications`
 
-## Event codes:
-`open_${app_category}`: When opening an application in a specific category
-
-`hang_${app_category}`: Application in specific category is unresponsive for longer than 10000 miliseconds
-
-`close_${app_category}`: When closing an application in a specific category
-
-`network_sync`: An application makes an HTTP(S) request
+Payload:

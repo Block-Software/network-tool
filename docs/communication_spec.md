@@ -3,10 +3,13 @@ layout: page
 title: Communication
 permalink: /comms_spec/
 ---
-# Connectivity monitoring and self-healing
-## PUT request for logging events:
+
+## PUT request for logging events
+
 ### PUT: `/api/event`
+
 ### Payload: `JSON`
+
 ```JSON
 {
   "cpu": "cpu usage percentage",
@@ -18,7 +21,9 @@ permalink: /comms_spec/
   "meta": { "a JSON object of": "unique data for the category" }
 }
 ```
+
 ### Response: `JSON` (this response is added to the callback trigger)
+
 ```JSON
 {
   "status": "good | warning | error",
@@ -27,9 +32,13 @@ permalink: /comms_spec/
   "event_id": "unique event ID for follow up tracing"
 }
 ```
+
 ## GET request for retrieving an application category:
+
 ### GET: `/api/category?application=Outlook`
+
 ### Response: `JSON`
+
 ```JSON
 {
   "category": "email_client | productivity_app | creative_app | database_app | cloud_app",
@@ -57,7 +66,8 @@ permalink: /comms_spec/
     }
 }
 ```
-## Application categories:
+
+## Application categories
 
 Application categories are used to allow different organisations to provide their own specific application and for it to fall within our dashboard and reporting tools correctly.
 
@@ -71,7 +81,8 @@ Application categories are used to allow different organisations to provide thei
 
 `cloud_app`: Eg Dropbox, Sage
 
-## Event codes:
+## Event codes
+
 `open_${app_category}`: When opening an application in a specific category
 
 `hang_${app_category}`: Application in specific category is unresponsive for longer than 10000 miliseconds

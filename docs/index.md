@@ -7,8 +7,10 @@ title: Home
 nav_order: 0
 ---
 
-## Data flow diagram
+## Project outline
+
 ### Data flow diagram
+
 ![data-flow](patent-diagram.jpg)
 
 ### [Agent specification](agent)

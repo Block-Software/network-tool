@@ -7,10 +7,6 @@ title: Performance and monitoring agent
 permalink: /agent/
 ---
 
-# Block Device performance and monitoring agent
-
-This document aims to uncover the journeys for the various user types and the reporting mechanisms for the various detection inputs.
-
 ## User Stories
 
 ### App configuration for a network
@@ -18,9 +14,9 @@ This document aims to uncover the journeys for the various user types and the re
 1. A Network administrator must log into the Dashboard (eg: dashboard.block.io) and authenticate against Active Directory
 1. Create connection between dashboard and the local network / cloud Active Directory
 1. Generate application groups and target specific AD resources (machines, groups, users)
-  * An application group consists of multiple [applications](#applications)
-  * Users targeted by an application group will have the applications monitored from their desktop agent
-  * Roaming profiles will allow the agent to be installed to multiple machines, but the configuration for the agent is loaded based on the logged in user
+    * An application group consists of multiple [applications](#applications)
+    * Users targeted by an application group will have the applications monitored from their desktop agent
+    * Roaming profiles will allow the agent to be installed to multiple machines, but the configuration for the agent is loaded based on the logged in user
 
 ### Background app monitoring for a network user
 
@@ -33,7 +29,7 @@ This document aims to uncover the journeys for the various user types and the re
 
 The backend receives network information from each agent on the network to highlight network traffic and performance information. This is then surfaced to administrators on the Dashboard to ask them to configure further information.
 
-_Configuring a network application_
+#### Configuring a network application
 
 A network application will be configured with the following details:
 

@@ -3,79 +3,135 @@ layout: page
 title: Database structure
 permalink: /db_structure/
 ---
-# Connectivity monitoring and self-healing
-## PUT request for logging events:
-### PUT: `/api/event`
-### Payload: `JSON`
+
+## Databases
+
+### Events
+
+#### Categories
+
+_id_: uuid
+
+_name_: string
+
+_short_code_: string
+
+_description_: string
+
+_assigned_applications_: array of objects
+
+```JSON
+[
+  {
+    "executable": "string",
+    "type": "string"
+  }
+]
+```
+
+_metrics_: indexed objects
+
 ```JSON
 {
-  "cpu": "cpu usage percentage",
-  "ram": "ram usage percentage",
-  "latency": "network latency in milliseconds",
-  "event": "event name",
-  "application": "application triggering event",
-  "trigger_time": "timestamp for event",
-  "meta": { "a JSON object of": "unique data for the category" }
+  "listener": "string",
+  "callback": "string",
+  "meta": [ "array of strings" ]
 }
 ```
-### Response: `JSON` (this response is added to the callback trigger)
+
+#### Entries
+
+_id_: uuid
+
+_date_: datetime
+
+_device_: uuid reference (Accounts:Devices)
+
+_category_: uuid reference (Events:Entries)
+
+_event_: uuid reference (Events:Entries:metrics)
+
+_data_: object
+
 ```JSON
 {
-  "status": "good | warning | error",
-  "message": "message relating to the status",
-  "average": [ "an array of average responses in the category" ],
-  "event_id": "unique event ID for follow up tracing"
+  "indexed": [ "additional", "data" ]
 }
 ```
-## GET request for retrieving an application category:
-### GET: `/api/category?application=Outlook`
-### Response: `JSON`
+
+### Accounts
+
+#### Users
+
+_id_: uuid
+
+_active_directory_id_: ad reference
+
+_email_: string
+
+_mobile_: string
+
+_preference_: enum: `email | mobile`
+
+_role_: uuid reference (Accounts:Roles)
+
+_manager_: uuid reference (Accounts:Users)
+
+#### Devices
+
+_id_: uuid
+
+_mac_: string
+
+_name_: string
+
+_user_: uuid reference (Accounts:Users)
+
+_location_: uuid reference (Accounts:Locations)
+
+#### Roles
+
+_id_: uuid
+
+_name_: string
+
+_parent_: uuid reference (Accounts:Roles)
+
+_permissions_: array of objects
+
+```JSON
+[
+  {
+    "access": "string",
+    "allow": true | false
+  }
+]
+```
+
+#### Locations
+
+_id_: uuid
+
+_name_: string
+
+_network_parameters_: object
+
 ```JSON
 {
-  "category": "email_client | productivity_app | creative_app | database_app | cloud_app",
-  "valid_metrics": {
-    "open": {
-      "meta": [ "fields related to the category" ],
-      "callback": "action name to trigger on success – and pass the event response"
-    },
-    "close": {
-      "meta": [ "fields related to the category" ],
-      "callback": "action name to trigger on success – and pass the event response"
-    },
-    "hang":  {
-        "meta": [ "fields related to the category" ],
-        "callback": "action name to trigger on success – and pass the event response",
-        "trigger_criteria": { "unresponsive": "> 10000ms" }
-    },
-    "sync": {
-      "listeners": [
-          {
-            "url": "URL to listen from application",
-            "method": "POST | GET"
-          }
-        ]
-    }
+  "meta": "data"
 }
 ```
-## Application categories:
 
-Application categories are used to allow different organisations to provide their own specific application and for it to fall within our dashboard and reporting tools correctly.
+### Preferences
 
-`email_client`: Eg Outlook, Mac Mail, Thunderbird, Gmail
+_id_: uuid
 
-`productivity_app`: Eg MS Word, MS Excel
+_user_: uuid reference (Accounts:Users)
 
-`creative_app`: Eg Photoshop
+_meta_: object
 
-`database_app`: Eg PAS, MS Access
-
-`cloud_app`: Eg Dropbox, Sage
-
-## Event codes:
-`open_${app_category}`: When opening an application in a specific category
-
-`hang_${app_category}`: Application in specific category is unresponsive for longer than 10000 miliseconds
-
-`close_${app_category}`: When closing an application in a specific category
-
-`network_sync`: An application makes an HTTP(S) request
+```JSON
+{
+  "property_name": "value"
+}
+```
