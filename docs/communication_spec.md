@@ -44,17 +44,17 @@ permalink: /comms_spec/
   "category": "email_client | productivity_app | creative_app | database_app | cloud_app",
   "valid_metrics": {
     "open": {
-      "meta": [ "fields related to the category" ],
+      "arguments": [ "fields related to the category" ],
       "callback": "action name to trigger on success – and pass the event response"
     },
     "close": {
-      "meta": [ "fields related to the category" ],
+      "arguments": [ "fields related to the category" ],
       "callback": "action name to trigger on success – and pass the event response"
     },
     "hang":  {
-        "meta": [ "fields related to the category" ],
-        "callback": "action name to trigger on success – and pass the event response",
-        "trigger_criteria": { "unresponsive": "> 10000ms" }
+      "arguments": [ "fields related to the category" ],
+      "callback": "action name to trigger on success – and pass the event response",
+      "trigger_criteria": { "unresponsive": "> 10000ms" }
     },
     "sync": {
       "listeners": [
@@ -63,6 +63,9 @@ permalink: /comms_spec/
             "method": "POST | GET"
           }
         ]
+    },
+    "interval": {
+      "parameters": { "object": "of targeted data" }
     }
 }
 ```

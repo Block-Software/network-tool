@@ -124,6 +124,8 @@ _network_parameters_: object
 
 ### Preferences
 
+#### Sync Settings
+
 _id_: uuid
 
 _user_: uuid reference (Accounts:Users)
@@ -135,3 +137,29 @@ _meta_: object
   "property_name": "value"
 }
 ```
+
+#### Dashboard Views
+
+_id_: uuid
+
+_user_: uuid reference (Accounts:Users)
+
+_widgets_: indexed object of uuid references (Preferences:Widgets)
+
+```JSON
+{
+  "id": "uuid",
+  "position": "x,y",
+  "size": "w,h"
+}
+```
+
+#### Widgets
+
+_id_: uuid
+
+_name_: string
+
+_query_: SQL string
+
+_view_: enum: `chart | pie | table | tag-cloud | sum`
