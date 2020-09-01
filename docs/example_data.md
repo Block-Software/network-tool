@@ -116,7 +116,7 @@ Response:
         "parameters": {
           "input_type": "ping",
           "target_ip": "0.0.0.0/1",
-          "frequency": "* * * */5"
+          "frequency": "0 */5 * * *"
         },
       },
       {
@@ -130,7 +130,7 @@ Response:
           "payload": {
             "example": "payload"
           },
-          "frequency": "* * 1 *"
+          "frequency": "0 * * * *"
         }
       },
       {
